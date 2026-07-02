@@ -27,12 +27,15 @@ Hebrew** and built for low‑latency, streaming voice applications.
 
 ## 🔴 Live experiment
 
-A **live experiment with the model** — real‑time Hebrew transcription of a live TV broadcast.
+A **live experiment with the model** — real‑time Hebrew transcription of a live TV news broadcast.
 
 <p align="center">
-  <video src="https://github.com/danielm1515/parakeet-tdt-0.6b-hebrew/releases/download/media-v1/parakeetheb_video.mp4" controls muted width="760"></video>
+  <a href="https://www.veed.io/view/ac8d0806-2ba8-4aec-a0b3-7fdaf9e0bf4e">
+    <img src="parakeetheb_video_thumb.jpg" width="360"
+         alt="Live experiment — real-time Hebrew transcription of a live TV broadcast (click to watch)">
+  </a>
   <br>
-  <sub>▶️ <a href="parakeetheb_video.mp4">Watch the live‑experiment video</a></sub><br>
+  <sub>▶️ <a href="https://www.veed.io/view/ac8d0806-2ba8-4aec-a0b3-7fdaf9e0bf4e"><b>Watch the video</b></a></sub><br>
   <sub><i>All rights reserved to <b>Channel 10</b> and the "<b>Boker Kalkali</b>" (Economic Morning) program.
   Shown here <b>solely to demonstrate the model's performance</b>.</i></sub>
 </p>
