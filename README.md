@@ -128,6 +128,20 @@ captioning, on‑device, and high‑throughput** pipelines where latency is the 
 
 ---
 
+## 🚀 Roadmap
+
+Data scale has been the single biggest lever at every step — so that's exactly where this is headed:
+
+- 📚 **Scale training to ~20,000 hours** of Hebrew (the full ivrit.ai corpus) — roughly **6× more
+  data** than v3's ~3,000 h.
+- 🎯 **Target: push WER *and* CER below 10 %** — moving from "strong" to "excellent" even on
+  spontaneous, in‑the‑wild speech.
+- 🧩 Complementary gains planned: language‑model (KenLM) fusion and transcript self‑cleaning.
+
+Every milestone will be validated the same disciplined way — on held‑out, real‑world Hebrew.
+
+---
+
 ## 🙏 Credits & attribution
 
 This model stands on the shoulders of excellent open work:
