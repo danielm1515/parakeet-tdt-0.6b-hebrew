@@ -19,7 +19,8 @@ Hebrew** and built for low‑latency, streaming voice applications.
 
 <p align="center">
   <img src="demo.gif" alt="Real-time Hebrew transcription speed" width="760"><br>
-  <sub><b>6.5 minutes (387&nbsp;s) of Hebrew audio → transcribed in ~0.5&nbsp;s — ~768× real‑time.</b></sub>
+  <sub><b>6.5 minutes (387&nbsp;s) of Hebrew audio → transcribed in ~0.5&nbsp;s — ~768× real‑time.</b></sub><br>
+  <sub>▶️ <a href="parakeet_speed_demo.mp4">Watch the full‑quality video</a></sub>
 </p>
 
 ---
