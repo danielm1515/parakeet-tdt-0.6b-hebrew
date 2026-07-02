@@ -100,6 +100,7 @@ decoding + bfloat16), throughput scales dramatically **with zero loss in accurac
 - **~768× faster than real‑time** in throughput mode — an hour of audio in ~5 seconds.
 - **~62 ms** to transcribe a spoken sentence — comfortable for live voice agents.
 - Runs on a single consumer GPU.
+- 💻 **No GPU? Still fast** — **~25× real‑time on CPU** (RTF 0.041, 24‑core, fp32) — an hour of audio in ~2.4 minutes, no accelerator required.
 
 ---
 
