@@ -40,7 +40,8 @@ Turning it into a strong Hebrew model took two things:
    powerful acoustic encoder.
 2. **Scaling the data** — the decisive lever. Training data grew version over version,
    culminating in **~3,000 hours** of diverse Hebrew: podcasts, a large weakly‑labeled corpus,
-   parliamentary speech, and recitals — trained with a **staged fine‑tuning** schedule in bfloat16.
+   parliamentary speech, and recitals — trained with a **staged fine‑tuning** schedule in bfloat16,
+   on **8× NVIDIA RTX 5090** GPUs.
 
 *The takeaway from the whole process: diverse data at scale is what moved the needle —
 each jump in hours produced a measurable jump in accuracy.*
