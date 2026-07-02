@@ -30,7 +30,7 @@ Hebrew** and built for low‑latency, streaming voice applications.
 A **live experiment with the model** — real‑time Hebrew transcription of a live TV broadcast.
 
 <p align="center">
-  <video src="https://raw.githubusercontent.com/danielm1515/parakeet-tdt-0.6b-hebrew/main/parakeetheb_video.mp4" controls muted width="760"></video>
+  <video src="https://github.com/danielm1515/parakeet-tdt-0.6b-hebrew/releases/download/media-v1/parakeetheb_video.mp4" controls muted width="760"></video>
   <br>
   <sub>▶️ <a href="parakeetheb_video.mp4">Watch the live‑experiment video</a></sub><br>
   <sub><i>All rights reserved to <b>Channel 10</b> and the "<b>Boker Kalkali</b>" (Economic Morning) program.
