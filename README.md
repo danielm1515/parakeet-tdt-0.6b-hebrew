@@ -128,6 +128,39 @@ captioning, on‑device, and high‑throughput** pipelines where latency is the 
 
 ---
 
+## 🙏 Credits & attribution
+
+This model stands on the shoulders of excellent open work:
+
+**NVIDIA**
+- Base model: [`nvidia/parakeet-tdt-0.6b-v3`](https://huggingface.co/nvidia/parakeet-tdt-0.6b-v3) —
+  the FastConformer‑TDT architecture and pretrained acoustic encoder this model was fine‑tuned from.
+- [**NVIDIA NeMo**](https://github.com/NVIDIA/NeMo) — the toolkit used for training and inference.
+
+**ivrit.ai** 🇮🇱 — the open Hebrew speech data that made this possible ([ivrit.ai](https://www.ivrit.ai)):
+- [`ivrit-ai/audio-v2`](https://huggingface.co/datasets/ivrit-ai/audio-v2) — large weakly‑labeled
+  Hebrew corpus (the bulk of the ~3,000 hours).
+- [`ivrit-ai/crowd-transcribe-v5`](https://huggingface.co/datasets/ivrit-ai/crowd-transcribe-v5) —
+  crowd‑transcribed podcasts.
+- [`ivrit-ai/knesset-plenums-whisper-training`](https://huggingface.co/datasets/ivrit-ai) —
+  parliamentary / formal speech.
+- crowd‑recital data.
+- Evaluation set: [`ivrit-ai/eval-whatsapp`](https://huggingface.co/datasets/ivrit-ai/eval-whatsapp).
+
+**Comparison baseline**
+- OpenAI [Whisper‑large‑v3‑turbo](https://huggingface.co/openai/whisper-large-v3-turbo), Hebrew
+  fine‑tune [`ivrit-ai/whisper-large-v3-turbo-ct2`](https://huggingface.co/ivrit-ai/whisper-large-v3-turbo-ct2).
+
+*Huge thanks to **NVIDIA** for the base model & NeMo, and to **ivrit.ai** for building and
+openly sharing high‑quality Hebrew speech resources — this work would not exist without them.*
+
+## 📄 Licenses (read before production use)
+- **Base model:** NVIDIA `parakeet‑tdt‑0.6b‑v3` — CC‑BY‑4.0 + NVIDIA Open Model License.
+- **This model:** CC‑BY‑4.0.
+- **Data:** ivrit.ai License (custom) — permits commercial AI training; review the terms.
+
+---
+
 ## 📌 Summary
 
 A Hebrew ASR model that is **fast, streaming‑ready, and accurate** — **13.5 % WER**, trained on
