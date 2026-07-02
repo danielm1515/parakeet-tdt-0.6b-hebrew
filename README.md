@@ -13,6 +13,11 @@ Hebrew** and built for low‑latency, streaming voice applications.
   <img alt="Language" src="https://img.shields.io/badge/Language-Hebrew-orange">
 </p>
 
+<p align="center">
+  <img src="demo.gif" alt="Real-time Hebrew transcription speed" width="760"><br>
+  <sub><b>170 seconds of Hebrew audio → transcribed in 350&nbsp;ms — ~486× real‑time.</b></sub>
+</p>
+
 ---
 
 ## ⭐ Headline results
