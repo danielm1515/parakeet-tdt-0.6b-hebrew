@@ -12,14 +12,14 @@ Hebrew** and built for low‑latency, streaming voice applications.
   <img alt="WER" src="https://img.shields.io/badge/WER-13.5%25-2ea44f">
   <img alt="CER" src="https://img.shields.io/badge/CER-6.1%25-2ea44f">
   <img alt="Data" src="https://img.shields.io/badge/Training_data-~3%2C000_hours-orange">
-  <img alt="Speed" src="https://img.shields.io/badge/Speed-~714%C3%97_realtime-blue">
+  <img alt="Speed" src="https://img.shields.io/badge/Speed-~768%C3%97_realtime-blue">
   <img alt="Latency" src="https://img.shields.io/badge/Latency-~62ms-blue">
   <img alt="Language" src="https://img.shields.io/badge/Language-Hebrew-orange">
 </p>
 
 <p align="center">
   <img src="demo.gif" alt="Real-time Hebrew transcription speed" width="760"><br>
-  <sub><b>170 seconds of Hebrew audio → transcribed in 350&nbsp;ms — ~486× real‑time.</b></sub>
+  <sub><b>6.5 minutes (387&nbsp;s) of Hebrew audio → transcribed in ~0.5&nbsp;s — ~768× real‑time.</b></sub>
 </p>
 
 ---
@@ -31,7 +31,7 @@ Hebrew** and built for low‑latency, streaming voice applications.
 | **Word Error Rate (WER)** | **13.5 %** *(held‑out podcasts test)* |
 | **Character Error Rate (CER)** | **6.1 %** |
 | **Trained on** | **~3,000 hours** of diverse Hebrew |
-| **Throughput** | **≈ 714× real‑time** (RTF 0.0014) |
+| **Throughput** | **≈ 768× real‑time** (RTF 0.0013) |
 | **Latency** (short utterance) | **≈ 62 ms** |
 | One hour of audio transcribed in | **≈ 5 seconds** |
 
@@ -95,9 +95,9 @@ decoding + bfloat16), throughput scales dramatically **with zero loss in accurac
 |---|:--:|:--:|
 | baseline | 0.0047 | ~213× |
 | + CUDA‑graph decoding | 0.0032 | ~313× |
-| **+ bfloat16** | **0.0014** | **~714×** |
+| **+ bfloat16** | **0.0013** | **~768×** |
 
-- **~714× faster than real‑time** in throughput mode — an hour of audio in ~5 seconds.
+- **~768× faster than real‑time** in throughput mode — an hour of audio in ~5 seconds.
 - **~62 ms** to transcribe a spoken sentence — comfortable for live voice agents.
 - Runs on a single consumer GPU.
 
@@ -110,10 +110,10 @@ Benchmarked head‑to‑head against a strong reference on the **same WhatsApp a
 | Model | WER | CER | Speed |
 |---|:--:|:--:|:--:|
 | Whisper‑large‑v3‑turbo (Hebrew) | 7.0 % | 3.3 % | ~43× real‑time |
-| **Parakeet‑TDT 0.6B Hebrew (this)** | 14.0 % | 6.6 % | **~714× real‑time** |
+| **Parakeet‑TDT 0.6B Hebrew (this)** | 14.0 % | 6.6 % | **~768× real‑time** |
 
 A deliberate trade‑off: **Whisper** is more accurate (offline, accuracy‑first). **Parakeet** is
-**~16× faster** and streaming‑native — the right tool for **real‑time voice agents, live
+**~18× faster** and streaming‑native — the right tool for **real‑time voice agents, live
 captioning, on‑device, and high‑throughput** pipelines where latency is the constraint.
 
 ---
@@ -188,7 +188,7 @@ openly sharing high‑quality Hebrew speech resources — this work would not ex
 ## 📌 Summary
 
 A Hebrew ASR model that is **fast, streaming‑ready, and accurate** — **13.5 % WER**, trained on
-**~3,000 hours** of Hebrew, running at **~714× real‑time**. Built through disciplined,
+**~3,000 hours** of Hebrew, running at **~768× real‑time**. Built through disciplined,
 data‑driven, metric‑tracked iteration.
 
 <sub>Base architecture: NVIDIA parakeet‑tdt‑0.6b‑v3 (FastConformer‑TDT). Numbers measured on real
