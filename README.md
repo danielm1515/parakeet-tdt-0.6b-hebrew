@@ -5,13 +5,14 @@
 # 🎙️ Parakeet‑TDT 0.6B — Hebrew
 
 **A fast, real‑time Hebrew speech‑to‑text model** — a Hebrew fine‑tune of NVIDIA's
-`parakeet‑tdt‑0.6b‑v3` (FastConformer + TDT transducer), **trained on ~3,000 hours of
-Hebrew** and built for low‑latency, streaming voice applications.
+`parakeet‑tdt‑0.6b‑v3` (FastConformer + TDT transducer), **trained on ~8,400 hours of
+consensus‑cleaned Hebrew** (v4) and built for low‑latency, streaming voice applications.
 
 <p align="center">
-  <img alt="WER" src="https://img.shields.io/badge/WER-13.5%25-2ea44f">
-  <img alt="CER" src="https://img.shields.io/badge/CER-6.1%25-2ea44f">
-  <img alt="Data" src="https://img.shields.io/badge/Training_data-~3%2C000_hours-orange">
+  <img alt="WER clean" src="https://img.shields.io/badge/WER_(clean_speech)-7.9%25-2ea44f">
+  <img alt="WER podcasts" src="https://img.shields.io/badge/WER_(podcasts%2C_beam%2BLM)-11.2%25-2ea44f">
+  <img alt="CER" src="https://img.shields.io/badge/CER-5.5%25-2ea44f">
+  <img alt="Data" src="https://img.shields.io/badge/Training_data-~8%2C400_hours-orange">
   <img alt="Speed" src="https://img.shields.io/badge/Speed-~768%C3%97_realtime-blue">
   <img alt="Latency" src="https://img.shields.io/badge/Latency-~62ms-blue">
   <img alt="Language" src="https://img.shields.io/badge/Language-Hebrew-orange">
@@ -42,18 +43,47 @@ A **live experiment with the model** — real‑time Hebrew transcription of a l
 
 ---
 
-## ⭐ Headline results
+## 🆕 v4 — the current release
+
+**v4 improves on v3 across every benchmark** — external‑LM decoding, a 2.8× larger
+consensus‑cleaned corpus (**8,391 hours**), and evaluation across multiple real‑world
+Hebrew benchmarks. Full details: **[V4_REPORT.md](V4_REPORT.md)**.
+
+| Benchmark | Content | v3 WER | **v4 WER** | Δ |
+|---|---|:--:|:--:|:--:|
+| **ivrit‑ai eval‑d1** | clean, directed speech | 14.19 % | **7.90 %** | **−6.29** |
+| **ivrit‑ai eval‑whatsapp** | casual phone voice notes | 13.82 % | **11.37 %** | −2.45 |
+| FLEURS he | encyclopedic (hard vocab) | 28.22 % | **24.71 %** | −3.51 |
+| crowd‑transcribe test (20k clips) | conversational podcasts, noisy | 13.25 % | **12.13 %** | −1.12 |
+
+With **beam search + external‑text KenLM** (5‑gram, Wikipedia + HeDC4, α=0.15) on the
+20k‑clip podcasts test: **12.13 % → 11.22 % WER, 5.48 % CER**.
+
+**What changed in v4** (see the [full report](V4_REPORT.md)):
+1. **Decoding:** greedy → beam search (`malsd_batch`, beam 8) + shallow fusion with an
+   external‑text 5‑gram KenLM.
+2. **Data:** 3,000 h → **8,391 h** via **consensus filtering** — every clip transcribed with
+   v3, compared to its Whisper pseudo‑label, and kept only when CER ≤ 0.20 (dropping the
+   worst ~15 % of bad audio / bad labels).
+3. **Training:** the proven staged fine‑tune (63k steps ≈ 8M samples, bf16, 8× RTX 5090),
+   same budget as v3 but drawn from the larger, cleaner pool.
+
+> On clean directed speech — the representative case for voice agents — **v4 is at 7.9 % WER,
+> half of v3's error rate**, before beam/LM decoding.
+
+---
+
+## ⭐ Headline results (v4)
 
 | | |
 |---|---|
-| **Word Error Rate (WER)** | **13.5 %** *(held‑out podcasts test)* |
-| **Character Error Rate (CER)** | **6.1 %** |
-| **Trained on** | **~3,000 hours** of diverse Hebrew |
+| **WER — clean directed speech** (eval‑d1) | **7.9 %** |
+| **WER — podcasts, 20k clips** (beam+LM) | **11.2 %** |
+| **Character Error Rate (CER)** | **5.5 %** |
+| **Trained on** | **~8,400 hours** of consensus‑cleaned Hebrew |
 | **Throughput** | **≈ 768× real‑time** (RTF 0.0013) |
 | **Latency** (short utterance) | **≈ 62 ms** |
 | One hour of audio transcribed in | **≈ 5 seconds** |
-
-> 13.5 % WER on real Hebrew speech, at hundreds of times faster than real‑time — on a single GPU.
 
 ---
 
@@ -85,11 +115,13 @@ tracked with hard numbers:
 | v1 | 21.6 % / 9.4 % | 40.6 % / 19.0 % | podcasts (~254 h) |
 | v2 | 19.4 % / 8.2 % | 27.6 % / 13.6 % | mixed (~761 h) |
 | v2.1 | 17.5 % / 7.6 % | — | ~765 h, longer fine‑tune |
-| **v3 ✅ (current)** | **13.5 % / 6.1 %** | — | **~3,000 h diverse** |
+| v3 | 13.5 % / 6.1 % | — | ~3,000 h diverse |
+| **v4 ✅ (current)** | **11.2 % / 5.5 %** *(beam+LM)* | — | **~8,400 h consensus‑cleaned** |
 
-**v3 cut WER by ~6 points vs v2** (19.4 → 13.5) — driven almost entirely by scaling to
-~3,000 hours of diverse data. On an identical 2,000‑sample podcasts subset, the head‑to‑head is
-v2 = 19.7 % → v2.1 = 17.5 % → **v3 = 13.5 %**.
+**v3 cut WER by ~6 points vs v2** (19.4 → 13.5), driven by scaling to ~3,000 hours;
+**v4 cut another ~2 points on the hardest benchmark** (13.25 → 11.22 with beam+LM) and —
+more importantly — **halved the error on clean directed speech** (14.2 → 7.9), showing the
+extra consensus‑cleaned data generalizes far beyond the in‑domain podcast set.
 
 ---
 
@@ -124,16 +156,20 @@ decoding + bfloat16), throughput scales dramatically **with zero loss in accurac
 
 ## ⚖️ Accuracy vs. Speed — an honest comparison
 
-Benchmarked head‑to‑head against a strong reference on the **same WhatsApp audio**:
+Benchmarked head‑to‑head against `ivrit‑ai/whisper‑large‑v3‑turbo` on **identical clips with
+identical normalization** (v4, greedy decoding):
 
-| Model | WER | CER | Speed |
-|---|:--:|:--:|:--:|
-| Whisper‑large‑v3‑turbo (Hebrew) | 7.0 % | 3.3 % | ~43× real‑time |
-| **Parakeet‑TDT 0.6B Hebrew (this)** | 14.0 % | 6.6 % | **~768× real‑time** |
+| Benchmark | **Parakeet v4 (this)** | ivrit‑ai Whisper turbo |
+|---|:--:|:--:|
+| eval‑d1 (clean) | 7.90 % | **4.80 %** |
+| eval‑whatsapp | 11.37 % | **7.68 %** |
+| FLEURS he | 24.71 % | **18.88 %** |
 
-A deliberate trade‑off: **Whisper** is more accurate (offline, accuracy‑first). **Parakeet** is
-**~18× faster** and streaming‑native — the right tool for **real‑time voice agents, live
-captioning, on‑device, and high‑throughput** pipelines where latency is the constraint.
+A deliberate trade‑off: **Whisper turbo** is more accurate (~3–6 WER lower) — expected, as it
+is larger (809M vs 617M) and was *pretrained* on Hebrew, while parakeet‑tdt saw **no Hebrew
+at all** before this fine‑tune. **Parakeet** is **many× faster** and **streaming‑native**
+(TDT transducer) — the right tool for **real‑time voice agents, live captioning, on‑device,
+and high‑throughput** pipelines where latency is the constraint.
 
 ---
 
@@ -159,15 +195,17 @@ captioning, on‑device, and high‑throughput** pipelines where latency is the 
 
 ## 🚀 Roadmap
 
-Data scale has been the single biggest lever at every step — so that's exactly where this is headed:
+v4 delivered two of the previous roadmap items (data scaling with self‑cleaning, and KenLM
+fusion). The credible next steps, per the [v4 error analysis](V4_REPORT.md):
 
-- 📚 **Scale training to ~20,000 hours** of Hebrew (the full ivrit.ai corpus) — roughly **6× more
-  data** than v3's ~3,000 h.
-- 🎯 **Target: push WER *and* CER below 10 %** — moving from "strong" to "excellent" even on
-  spontaneous, in‑the‑wild speech.
-- 🧩 Complementary gains planned: language‑model (KenLM) fusion and transcript self‑cleaning.
+- 🧪 **Knowledge distillation:** re‑label the 8,391 h corpus with `ivrit‑ai/whisper‑large‑v3‑turbo`
+  (a far better teacher than the original pseudo‑labels), then retrain — distilling
+  Whisper‑grade accuracy into a fast streaming model.
+- 📏 **Larger base:** `parakeet‑tdt‑1.1b` with the same recipe.
+- 🎯 **Domain‑matched data:** a few hundred hours of the actual target audio remains the most
+  reliable lever for any specific use case.
 
-Every milestone will be validated the same disciplined way — on held‑out, real‑world Hebrew.
+Every milestone is validated the same disciplined way — on held‑out, real‑world Hebrew.
 
 ---
 
@@ -206,8 +244,9 @@ openly sharing high‑quality Hebrew speech resources — this work would not ex
 
 ## 📌 Summary
 
-A Hebrew ASR model that is **fast, streaming‑ready, and accurate** — **13.5 % WER**, trained on
-**~3,000 hours** of Hebrew, running at **~768× real‑time**. Built through disciplined,
+A Hebrew ASR model that is **fast, streaming‑ready, and accurate** — **7.9 % WER on clean
+speech / 11.2 % on hard conversational podcasts (v4)**, trained on **~8,400 hours** of
+consensus‑cleaned Hebrew, running at **~768× real‑time**. Built through disciplined,
 data‑driven, metric‑tracked iteration.
 
 <sub>Base architecture: NVIDIA parakeet‑tdt‑0.6b‑v3 (FastConformer‑TDT). Numbers measured on real
