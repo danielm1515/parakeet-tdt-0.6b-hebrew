@@ -1,0 +1,4 @@
+# .NET build artifacts (examples/MilaWin)
+examples/**/bin/
+examples/**/obj/
+__pycache__/

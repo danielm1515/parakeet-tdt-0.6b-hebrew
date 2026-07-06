@@ -173,6 +173,26 @@ and high‑throughput** pipelines where latency is the constraint.
 
 ---
 
+## 🪄 Mila for Windows — the model as a dictation app
+
+To show what this speed enables in practice, the repo includes
+**[MilaWin](examples/)** — a local, privacy-first Windows dictation app built entirely
+on this model (inspired by [mila](https://github.com/island-io/mila) for macOS):
+
+- 🎙️ **Press a hotkey, speak — the words are typed at your cursor** in any application.
+- ⚡ **Live streaming dictation**: the model re-transcribes the whole utterance every
+  700 ms while you speak (it is fast enough that this costs nothing), and every pause
+  settles the text to the final transcription.
+- 🔊 **System-audio mode**: transcribe what the PC *plays* (meetings, videos) via
+  WASAPI loopback.
+- 📦 Runs against a ~60-line local HTTP wrapper of the model
+  ([`examples/stt_parakeet_server.py`](examples/stt_parakeet_server.py)) — audio never
+  leaves the machine.
+
+See **[examples/](examples/)** for the code and setup.
+
+---
+
 ## 🎯 Where it shines
 
 - 🗣️ **Real‑time voice agents** — sub‑100 ms transcription keeps conversations natural.
