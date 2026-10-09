@@ -2,7 +2,7 @@
   <img src="parakeet_hebrew_logo.png" alt="Parakeet-TDT Hebrew" width="520">
 </p>
 
-https://github.com/danielm1515/parakeet-tdt-0.6b-hebrew
+https://huggingface.co/dm15/parakeet-tdt-0.6b-hebrew
 
 # 🎙️ Parakeet‑TDT 0.6B — Hebrew
 
