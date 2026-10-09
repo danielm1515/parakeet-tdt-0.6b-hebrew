@@ -2,6 +2,8 @@
   <img src="parakeet_hebrew_logo.png" alt="Parakeet-TDT Hebrew" width="520">
 </p>
 
+https://github.com/danielm1515/parakeet-tdt-0.6b-hebrew
+
 # 🎙️ Parakeet‑TDT 0.6B — Hebrew
 
 **A fast, real‑time Hebrew speech‑to‑text model** — a Hebrew fine‑tune of NVIDIA's
